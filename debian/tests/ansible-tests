@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eufx
+
+cp -a tests/ansible "$AUTOPKGTEST_TMP/ansible-tests"
+cp tests/testlib.py "$AUTOPKGTEST_TMP/ansible-tests/"
+cd "$AUTOPKGTEST_TMP"
+
+python3 -m unittest discover -v \
+    --start-directory ansible-tests \
+    --pattern '*_test.py'

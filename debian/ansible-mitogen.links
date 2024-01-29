@@ -1,0 +1,4 @@
+/usr/lib/python3/dist-packages/ansible_mitogen/plugins/strategy/mitogen.py /usr/lib/python3/dist-packages/ansible/plugins/strategy/mitogen.py
+/usr/lib/python3/dist-packages/ansible_mitogen/plugins/strategy/mitogen_free.py /usr/lib/python3/dist-packages/ansible/plugins/strategy/mitogen_free.py
+/usr/lib/python3/dist-packages/ansible_mitogen/plugins/strategy/mitogen_host_pinned.py /usr/lib/python3/dist-packages/ansible/plugins/strategy/mitogen_host_pinned.py
+/usr/lib/python3/dist-packages/ansible_mitogen/plugins/strategy/mitogen_linear.py /usr/lib/python3/dist-packages/ansible/plugins/strategy/mitogen_linear.py

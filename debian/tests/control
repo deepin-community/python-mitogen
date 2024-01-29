@@ -1,0 +1,7 @@
+Tests: ansible-tests
+Depends: ansible-mitogen, python3-mock, python3-psutil
+Restrictions: allow-stderr, needs-root
+
+Tests: mitogen-tests
+Depends: python3-mitogen, python3-mock, python3-psutil
+Restrictions: allow-stderr

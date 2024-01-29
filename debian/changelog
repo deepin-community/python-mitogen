@@ -1,5 +1,196 @@
-template-repository (1.0-1) unstable; urgency=medium
+python-mitogen (0.3.4-2) unstable; urgency=medium
 
-  * Initial release
+  * Patch: Fix --ask-become-pass, again. We had backed out part of the
+    ansible-6 patch to avoid this, before, but it came back in 0.3.4,
+    upstream. (Closes: #1042556)
 
- -- Tsic404 <liuheng@deepin.org>  Sat, 28 Jan 2023 13:46:49 +0800
+ -- Stefano Rivera <stefanor@debian.org>  Fri, 04 Aug 2023 14:00:58 +0300
+
+python-mitogen (0.3.4-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Refresh patches.
+  * Drop patches, superseded upstream: ansible-6, hack-remove-cleanup, and
+    unbundle-simplejson.
+  * Patch: Bump max ansible to 2.14. Previously this was done in our ansible-6
+    patch, but the rest of that has merged upstream.
+  * Update copyright.
+  * Patch: Drop use of subprocess32 compatibility backport.
+  * Bump Standards-Version to 4.6.2, no changes needed.
+
+ -- Stefano Rivera <stefanor@debian.org>  Tue, 18 Jul 2023 19:00:18 +0200
+
+python-mitogen (0.3.3-9) unstable; urgency=medium
+
+  * Patch: Use poll() in the broker to handle more file descriptors.
+    (Closes: #1036018)
+
+ -- Stefano Rivera <stefanor@debian.org>  Sat, 13 May 2023 09:45:14 -0400
+
+python-mitogen (0.3.3-8) unstable; urgency=medium
+
+  * Team upload.
+  * d/p/ansible-6, d/control: Bump max ansible to 2.14/7.
+
+ -- Unit 193 <unit193@debian.org>  Tue, 13 Dec 2022 21:43:51 -0500
+
+python-mitogen (0.3.3-7) unstable; urgency=medium
+
+  * Support the nocheck build profile.
+
+ -- Stefano Rivera <stefanor@debian.org>  Mon, 17 Oct 2022 16:57:13 +0200
+
+python-mitogen (0.3.3-6) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Set upstream metadata fields: Bug-Submit.
+
+ -- Jelmer Vernooĳ <jelmer@debian.org>  Sun, 16 Oct 2022 23:30:33 +0100
+
+python-mitogen (0.3.3-5) unstable; urgency=medium
+
+  * d/p/ansible-6: Remove a commit to fix a regression in 'become' (#944, #952)
+
+ -- Unit 193 <unit193@debian.org>  Tue, 27 Sep 2022 03:41:29 -0400
+
+python-mitogen (0.3.3-4) unstable; urgency=medium
+
+  * Patch: Avoid ugly tracebacks in loop tasks, due to connection cleanup in a
+    destructor. (Closes: #1020622)
+
+ -- Stefano Rivera <stefanor@debian.org>  Sun, 25 Sep 2022 14:56:22 +0200
+
+python-mitogen (0.3.3-3) unstable; urgency=medium
+
+  * Patch: Ansible 6 support. (Closes: #1019501)
+  * Update Depends appropriately.
+
+ -- Stefano Rivera <stefanor@debian.org>  Mon, 12 Sep 2022 14:48:43 +0200
+
+python-mitogen (0.3.3-2) unstable; urgency=medium
+
+  * Drop Build-Depends on python2. (Closes: #1016681)
+    - Patch: Stop the (trivial) testing against python2.7.
+
+ -- Stefano Rivera <stefanor@debian.org>  Sat, 06 Aug 2022 13:56:33 +0200
+
+python-mitogen (0.3.3-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Refresh patches.
+  * Drop patch distro-1.7, superseded upstream.
+  * Stop Build-Depending on unittest2, upstream stopped using it. Update
+    patches appropriately.
+
+ -- Stefano Rivera <stefanor@debian.org>  Wed, 22 Jun 2022 18:15:13 +0200
+
+python-mitogen (0.3.2-1) unstable; urgency=medium
+
+  * New upstream version.
+  * d/tests/control: Add needs-root restrictions to ansible-tests.
+  * d/control: Bump Standards-Version to 4.6.1 (from 4.6.0; no further
+    changes).
+
+ -- Emmanuel Arias <eamanu@yaerobi.com>  Tue, 31 May 2022 12:35:46 -0300
+
+python-mitogen (0.3.1-4) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Set upstream metadata fields: Repository.
+
+ -- Jelmer Vernooĳ <jelmer@debian.org>  Wed, 25 May 2022 21:22:44 +0100
+
+python-mitogen (0.3.1-3) unstable; urgency=medium
+
+  * Patch: Support the presence of distro 1.7.0. (Closes: #1006330)
+
+ -- Stefano Rivera <stefanor@debian.org>  Sun, 06 Mar 2022 12:04:58 -0400
+
+python-mitogen (0.3.1-2) unstable; urgency=medium
+
+  * Depend on either ansible-core | ansible, now that ansible-core has been
+    split into its own binary package. (Closes: #1003775)
+
+ -- Stefano Rivera <stefanor@debian.org>  Sun, 16 Jan 2022 09:53:39 -0400
+
+python-mitogen (0.3.1-1) unstable; urgency=medium
+
+  * New upstream release. (Closes: #1001700)
+  * Update python3 patch.
+  * Bump copyright years.
+  * Constrain maximum supported ansible version in Depends, as it is imposed
+    at run-time by mitogen.
+
+ -- Stefano Rivera <stefanor@debian.org>  Fri, 14 Jan 2022 15:22:59 -0400
+
+python-mitogen (0.3.0-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Drop patches, superseded upstream: check-version-early,
+    multi-word-cpusets, skip-root-test_unwriteable.
+  * Drop +ds suffix, we're sticking with GitHub as a source.
+  * Bump Standards-Version to 4.6.0, no changes needed.
+
+ -- Stefano Rivera <stefanor@debian.org>  Mon, 01 Nov 2021 20:43:01 -0700
+
+python-mitogen (0.3.0~rc1+ds-2) unstable; urgency=medium
+
+  * Upload to unstable.
+
+ -- Stefano Rivera <stefanor@debian.org>  Sun, 15 Aug 2021 22:20:44 -0400
+
+python-mitogen (0.3.0~rc1+ds-1) experimental; urgency=medium
+
+  * Download source from GitHub (with bundled tests).
+  * Update control files to reflect new test locations.
+  * Migrate upstream_tests patches to quilt series.
+  * Add test dependencies to Build-Depends so we can run them at build time.
+  * Run tests at build time.
+  * Skip tests that fail for unknown reasons.
+  * Skip Django tests, that tend to fail.
+
+ -- Stefano Rivera <stefanor@debian.org>  Sat, 24 Apr 2021 13:50:02 -0400
+
+python-mitogen (0.3.0~rc1-4) unstable; urgency=medium
+
+  * autopkgtests: Support multi-word cpusets.
+  * autopkgtests: Skip test_broken_linux_fallback on ppc64el, where it fails.
+
+ -- Stefano Rivera <stefanor@debian.org>  Wed, 21 Apr 2021 11:50:52 -0400
+
+python-mitogen (0.3.0~rc1-3) unstable; urgency=medium
+
+  [ Lee Garrett ]
+  * Depend on ansible, instead of ansible-base for bullseye.
+  * Add autopkgtests running the useable subset of the upstream tests.
+
+ -- Stefano Rivera <stefanor@debian.org>  Tue, 20 Apr 2021 15:53:48 -0400
+
+python-mitogen (0.3.0~rc1-2) unstable; urgency=medium
+
+  * Upload to unstable, following ansible.
+  * Update homepage, GitHub repo got moved to a mitogen org.
+  * Patch: upstream change since RC: Check ansible version early.
+  * Depend on ansible-base instead of ansible.
+
+ -- Stefano Rivera <stefanor@debian.org>  Mon, 19 Apr 2021 20:07:44 -0400
+
+python-mitogen (0.3.0~rc1-1) experimental; urgency=medium
+
+  * New upstream RC release, targeting Ansible 2.10.
+  * Bump Depends to ansible (>= 2.10).
+  * Update copyright.
+
+ -- Stefano Rivera <stefanor@debian.org>  Mon, 08 Feb 2021 21:05:57 -0800
+
+python-mitogen (0.2.9-2) unstable; urgency=medium
+
+  * No-change source-only upload.
+
+ -- Stefano Rivera <stefanor@debian.org>  Mon, 25 Jan 2021 15:21:18 -0700
+
+python-mitogen (0.2.9-1) unstable; urgency=low
+
+  * Initial Packaging (Closes: #942853)
+
+ -- Stefano Rivera <stefanor@debian.org>  Sat, 16 Jan 2021 15:03:21 -0700

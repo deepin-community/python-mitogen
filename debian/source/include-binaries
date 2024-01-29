@@ -1,0 +1,7 @@
+tests/ansible/lib/modules/custom_binary_producing_json_Darwin
+tests/ansible/lib/modules/custom_binary_producing_json_Linux
+tests/ansible/lib/modules/custom_binary_producing_junk_Darwin
+tests/ansible/lib/modules/custom_binary_producing_junk_Linux
+tests/ansible/lib/modules/custom_binary_single_null
+tests/data/docker/doas-debian.tar.gz
+tests/data/unarchive_test.tar

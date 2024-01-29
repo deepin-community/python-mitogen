@@ -1,0 +1,11 @@
+Using Mitogen for Ansible
+=========================
+
+The mitogen strategies are installed into the ansible strategy plugin
+directory. So, all you need to do is select one of them.
+
+Either:
+1. Export ANSIBLE_STRATEGY=mitogen_linear, or
+2. Add to your ansible.cfg:
+   [defaults]
+   strategy = mitogen_linear
