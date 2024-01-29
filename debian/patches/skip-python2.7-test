@@ -1,0 +1,25 @@
+From: Stefano Rivera <stefanor@debian.org>
+Date: Fri, 5 Aug 2022 17:02:10 +0200
+Subject: Skip two_three_compat_test, requires python2.7
+
+Debian is removing python2.7 from the archive, skip tests that require
+it.
+
+Bug-Debian: https://bugs.debian.org/1016681
+Forwarded: no
+---
+ tests/two_three_compat_test.py | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/tests/two_three_compat_test.py b/tests/two_three_compat_test.py
+index 4490e5d..723b96b 100644
+--- a/tests/two_three_compat_test.py
++++ b/tests/two_three_compat_test.py
+@@ -13,6 +13,7 @@ class TwoThreeCompatTest(testlib.RouterMixin, testlib.TestCase):
+     else:
+         python_path = 'python3'
+ 
++    @testlib.unittest.skip("Requires Python 2.7, no longer available")
+     def test_succeeds(self):
+         spare = self.router.local()
+         target = self.router.local(python_path=self.python_path)

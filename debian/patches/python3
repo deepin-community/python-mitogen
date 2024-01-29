@@ -1,0 +1,208 @@
+From: Stefano Rivera <stefanor@debian.org>
+Date: Sat, 24 Apr 2021 11:44:49 -0400
+Subject: tests: Use the "python3" interpreter
+
+The "python" binary isn't available in Debian buster. Except via the
+python-is-* packages, which are only for end-user use.
+---
+ tests/data/broker_shutdown_test_python.py | 2 +-
+ tests/data/python_never_responds.py       | 2 +-
+ tests/data/stubs/stub-buildah.py          | 2 +-
+ tests/data/stubs/stub-doas.py             | 2 +-
+ tests/data/stubs/stub-docker.py           | 2 +-
+ tests/data/stubs/stub-jexec.py            | 2 +-
+ tests/data/stubs/stub-kubectl.py          | 2 +-
+ tests/data/stubs/stub-lxc-attach.py       | 2 +-
+ tests/data/stubs/stub-lxc-info.py         | 2 +-
+ tests/data/stubs/stub-lxc.py              | 2 +-
+ tests/data/stubs/stub-podman.py           | 2 +-
+ tests/data/stubs/stub-python.py           | 2 +-
+ tests/data/stubs/stub-ssh.py              | 2 +-
+ tests/data/stubs/stub-su.py               | 2 +-
+ tests/data/stubs/stub-sudo.py             | 2 +-
+ tests/lxd_test.py                         | 1 +
+ tests/ssh_test.py                         | 2 ++
+ 17 files changed, 18 insertions(+), 15 deletions(-)
+
+diff --git a/tests/data/broker_shutdown_test_python.py b/tests/data/broker_shutdown_test_python.py
+index f1e20c1..ae812d8 100755
+--- a/tests/data/broker_shutdown_test_python.py
++++ b/tests/data/broker_shutdown_test_python.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # Delete a semaphore file to allow the main thread to wake up, then sleep for
+ # 30 seconds before starting the real Python.
+ import os
+diff --git a/tests/data/python_never_responds.py b/tests/data/python_never_responds.py
+index 9caa5a6..cdf4b6e 100755
+--- a/tests/data/python_never_responds.py
++++ b/tests/data/python_never_responds.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # I am a Python interpreter that sits idle until the connection times out.
+ 
+ import time
+diff --git a/tests/data/stubs/stub-buildah.py b/tests/data/stubs/stub-buildah.py
+index 558f117..0302480 100755
+--- a/tests/data/stubs/stub-buildah.py
++++ b/tests/data/stubs/stub-buildah.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import sys
+ import os
+diff --git a/tests/data/stubs/stub-doas.py b/tests/data/stubs/stub-doas.py
+index ca929bc..8156098 100755
+--- a/tests/data/stubs/stub-doas.py
++++ b/tests/data/stubs/stub-doas.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import json
+ import os
+diff --git a/tests/data/stubs/stub-docker.py b/tests/data/stubs/stub-docker.py
+index 341cc81..864d922 100755
+--- a/tests/data/stubs/stub-docker.py
++++ b/tests/data/stubs/stub-docker.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import sys
+ import os
+diff --git a/tests/data/stubs/stub-jexec.py b/tests/data/stubs/stub-jexec.py
+index 3f3e3bd..0a71742 100755
+--- a/tests/data/stubs/stub-jexec.py
++++ b/tests/data/stubs/stub-jexec.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import json
+ import os
+diff --git a/tests/data/stubs/stub-kubectl.py b/tests/data/stubs/stub-kubectl.py
+index 16f7e46..6f38313 100755
+--- a/tests/data/stubs/stub-kubectl.py
++++ b/tests/data/stubs/stub-kubectl.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import sys
+ import os
+diff --git a/tests/data/stubs/stub-lxc-attach.py b/tests/data/stubs/stub-lxc-attach.py
+index 5263d36..b641aec 100755
+--- a/tests/data/stubs/stub-lxc-attach.py
++++ b/tests/data/stubs/stub-lxc-attach.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import sys
+ import os
+diff --git a/tests/data/stubs/stub-lxc-info.py b/tests/data/stubs/stub-lxc-info.py
+index 480bf26..c8b2b99 100755
+--- a/tests/data/stubs/stub-lxc-info.py
++++ b/tests/data/stubs/stub-lxc-info.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # Mainly for use in stubconnections/kubectl.yml
+ 
+ print('PID: 1')
+diff --git a/tests/data/stubs/stub-lxc.py b/tests/data/stubs/stub-lxc.py
+index 9d14090..288ebbe 100755
+--- a/tests/data/stubs/stub-lxc.py
++++ b/tests/data/stubs/stub-lxc.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import sys
+ import os
+diff --git a/tests/data/stubs/stub-podman.py b/tests/data/stubs/stub-podman.py
+index 28f5518..1e86475 100755
+--- a/tests/data/stubs/stub-podman.py
++++ b/tests/data/stubs/stub-podman.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import sys
+ import os
+diff --git a/tests/data/stubs/stub-python.py b/tests/data/stubs/stub-python.py
+index f18b0b6..27cd292 100755
+--- a/tests/data/stubs/stub-python.py
++++ b/tests/data/stubs/stub-python.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import json
+ import os
+diff --git a/tests/data/stubs/stub-ssh.py b/tests/data/stubs/stub-ssh.py
+index 80c0283..a04f993 100755
+--- a/tests/data/stubs/stub-ssh.py
++++ b/tests/data/stubs/stub-ssh.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import optparse
+ import os
+diff --git a/tests/data/stubs/stub-su.py b/tests/data/stubs/stub-su.py
+index e353a75..4adad61 100755
+--- a/tests/data/stubs/stub-su.py
++++ b/tests/data/stubs/stub-su.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import json
+ import os
+diff --git a/tests/data/stubs/stub-sudo.py b/tests/data/stubs/stub-sudo.py
+index 71364df..b9b4b86 100755
+--- a/tests/data/stubs/stub-sudo.py
++++ b/tests/data/stubs/stub-sudo.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import json
+ import os
+diff --git a/tests/lxd_test.py b/tests/lxd_test.py
+index 6573e1b..98e93ec 100644
+--- a/tests/lxd_test.py
++++ b/tests/lxd_test.py
+@@ -12,6 +12,7 @@ class ConstructorTest(testlib.RouterMixin, testlib.TestCase):
+         context = self.router.lxd(
+             container='container_name',
+             lxc_path=lxc_path,
++            python_path='python3',
+         )
+ 
+         argv = eval(context.call(os.getenv, 'ORIGINAL_ARGV'))
+diff --git a/tests/ssh_test.py b/tests/ssh_test.py
+index 429fdb5..34e3e03 100644
+--- a/tests/ssh_test.py
++++ b/tests/ssh_test.py
+@@ -18,6 +18,7 @@ class StubSshMixin(testlib.RouterMixin):
+             return self.router.ssh(
+                 hostname='hostname',
+                 username='mitogen__has_sudo',
++                python_path='python3',
+                 ssh_path=testlib.data_path('stubs/stub-ssh.py'),
+                 **kwargs
+             )
+@@ -30,6 +31,7 @@ class ConstructorTest(testlib.RouterMixin, testlib.TestCase):
+         context = self.router.ssh(
+             hostname='hostname',
+             username='mitogen__has_sudo',
++            python_path='python3',
+             ssh_path=testlib.data_path('stubs/stub-ssh.py'),
+         )
+         #context.call(mitogen.utils.log_to_file, '/tmp/log')

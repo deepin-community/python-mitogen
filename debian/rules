@@ -1,4 +1,12 @@
-#!/usr/bin/make -f
+#! /usr/bin/make -f
+
+export PYBUILD_BEFORE_BUILD=rm -rf {dir}/ansible_mitogen/compat/simplejson
 
 %:
-	dh $@
+	dh $@ --with python3 --buildsystem=pybuild
+
+override_dh_auto_test:
+	dh_auto_test -- --system custom --test-args="{interpreter} \
+			-m unittest discover -v \
+			--start-directory {dir}/tests \
+			--pattern '*_test.py'"

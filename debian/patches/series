@@ -1,0 +1,9 @@
+python3
+skip-ppc64el-test_broken_linux_fallback
+skip-failing-tests
+skip-django-tests
+skip-python2.7-test
+poll-poller
+no-subprocess32
+ansible-2.14
+ask-become-pass

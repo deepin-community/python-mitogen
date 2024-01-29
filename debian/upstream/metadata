@@ -1,0 +1,10 @@
+---
+Bug-Database: https://github.com/mitogen-hq/mitogen/issues
+Bug-Submit: https://github.com/mitogen-hq/mitogen/issues/new
+Changelog: https://mitogen.networkgenomics.com/changelog.html
+Documentation: https://mitogen.networkgenomics.com/
+Registry:
+  - Name: PyPI
+    Entry: mitogen
+Repository: https://github.com/mitogen-hq/mitogen.git
+Repository-Browse: https://github.com/mitogen-hq/mitogen
