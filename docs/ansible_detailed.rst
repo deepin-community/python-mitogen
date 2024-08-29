@@ -18,7 +18,7 @@ The extension is considered stable and real-world use is encouraged.
 
 .. _Ansible: https://www.ansible.com/
 
-.. _Bug reports: https://goo.gl/yLKZiJ
+.. _Bug reports: https://github.com/mitogen-hq/mitogen/issues/new/choose
 
 
 Overview
@@ -75,34 +75,6 @@ Installation
    ``mitogen_host_pinned`` strategies exists to mimic the ``free`` and
    ``host_pinned`` strategies.
 
-4.
-
-   .. raw:: html
-
-    <form action="https://networkgenomics.com/save-email/" method="post" id="emailform">
-        <input type=hidden name="list_name" value="mitogen-announce">
-
-        Get notified of new releases and important fixes.
-
-        <p>
-        <input type="email" placeholder="E-mail Address" name="email" style="font-size: 105%;"><br>
-        <input name="captcha_1" placeholder="Captcha" style="width: 10ex;">
-        <img class="captcha-image">
-        <a class="captcha-refresh" href="#">&#x21bb</a>
-
-        <button type="submit" style="font-size: 105%;">
-            Subscribe
-        </button>
-
-        </p>
-
-        <div id="emailthanks" style="display:none">
-            Thanks!
-        </div>
-
-        <p>
-    </form>
-
 
 Demo
 ~~~~
@@ -147,8 +119,29 @@ Noteworthy Differences
 
 * Mitogen 0.2.x supports Ansible 2.3-2.9; with Python 2.6, 2.7, or 3.6.
   Mitogen 0.3.1+ supports
-    - Ansible 2.10, 3, and 4; with Python 2.7, or 3.6-3.10
-    - Ansible 5 and 6; with Python 3.8-3.10
+
+  +-----------------+-----------------+
+  | Ansible version | Python versions |
+  +=================+=================+
+  | 2.10            |                 |
+  +-----------------+                 |
+  | 3               | 2.7, 3.6 - 3.11 |
+  +-----------------+                 |
+  | 4               |                 |
+  +-----------------+-----------------+
+  | 5               | 3.8 - 3.11      |
+  +-----------------+-----------------+
+  | 6               |                 |
+  +-----------------+ 3.8 - 3.12      |
+  | 7               |                 |
+  +-----------------+-----------------+
+  | 8               | 3.9 - 3.12      |
+  +-----------------+-----------------+
+  | 9               |                 |
+  +-----------------+ 3.10 - 3.12     |
+  | 10              |                 |
+  +-----------------+-----------------+
+
   Verify your installation is running one of these versions by checking
   ``ansible --version`` output.
 
@@ -228,6 +221,15 @@ Noteworthy Differences
   part of the core library, and should therefore be straightforward to fix as
   part of 0.2.x.
 
+* Connection and become timeouts are applied differently. Mitogen may consider
+  a connection to have timed out, when Ansible would have waited longer or
+  indefinately. For example if SSH authentication completes within the
+  timeout, but execution of login scripts exceeds it - then Mitogen will
+  consider the task to have timed out and that host to have failed.
+
+..
+    tests/ansible/integration/ssh/timeouts.yml covers (some of) this behaviour.
+
 ..
     * SSH and ``become`` are treated distinctly when applying timeouts, and
     timeouts apply up to the point when the new interpreter is ready to accept
@@ -243,15 +245,14 @@ Noteworthy Differences
     * "Module Replacer" style modules are not supported. These rarely appear in
     practice, and light web searches failed to reveal many examples of them.
 
-..
-    * The ``ansible_python_interpreter`` variable is parsed using a restrictive
-      :mod:`shell-like <shlex>` syntax, permitting values such as ``/usr/bin/env
-      FOO=bar python`` or ``source /opt/rh/rh-python36/enable && python``, which
-      occur in practice. Jinja2 templating is also supported for complex task-level
-      interpreter settings. Ansible `documents this
-      <https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#ansible-python-interpreter>`_
-      as an absolute path, however the implementation passes it unquoted through
-      the shell, permitting arbitrary code to be injected.
+* The ``ansible_python_interpreter`` variable is parsed using a restrictive
+  :mod:`shell-like <shlex>` syntax, permitting values such as ``/usr/bin/env
+  FOO=bar python`` or ``source /opt/rh/rh-python36/enable && python``.
+  Jinja2 templating is also supported for complex task-level
+  interpreter settings. Ansible documents `ansible_python_interpreter
+  <https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#ansible-python-interpreter>`_
+  as an absolute path and releases since June 2024 (e.g. Ansible 10.1)
+  reflect this. Older Ansible releases passed it to the shell unquoted.
 
 ..
     * Configurations will break that rely on the `hashbang argument splitting
@@ -1291,7 +1292,7 @@ Sample Profiles
 ---------------
 
 The summaries below may be reproduced using data and scripts maintained in the
-`pcaps branch <https://github.com/dw/mitogen/tree/pcaps/>`_. Traces were
+`pcaps branch <https://github.com/mitogen-hq/mitogen/tree/pcaps/>`_. Traces were
 recorded using Ansible 2.5.14.
 
 
@@ -1300,7 +1301,7 @@ Trivial Loop: Local Host
 
 This demonstrates Mitogen vs. SSH pipelining to the local machine running
 `bench/loop-100-items.yml
-<https://github.com/dw/mitogen/blob/master/tests/ansible/bench/loop-100-items.yml>`_,
+<https://github.com/mitogen-hq/mitogen/blob/master/tests/ansible/bench/loop-100-items.yml>`_,
 executing a simple command 100 times. Most Ansible controller overhead is
 isolated, characterizing just module executor and connection layer performance.
 Mitogen requires **63x less bandwidth and 5.9x less time**.
@@ -1328,7 +1329,7 @@ File Transfer: UK to France
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 `This playbook
-<https://github.com/dw/mitogen/blob/master/tests/ansible/regression/issue_140__thread_pileup.yml>`_
+<https://github.com/mitogen-hq/mitogen/blob/master/tests/ansible/regression/issue_140__thread_pileup.yml>`_
 was used to compare file transfer performance over a ~26 ms link. It uses the
 ``with_filetree`` loop syntax to copy a directory of 1,000 0-byte files to the
 target.
@@ -1390,20 +1391,3 @@ Despite the small margin for optimization, Mitogen still manages **6.2x less
 bandwidth and 1.8x less time**.
 
 .. image:: images/ansible/pcaps/costapp-uk-india.svg
-
-
-.. raw:: html
-
-    <script src="https://networkgenomics.com/static/js/public_all.js?92d49a3a"></script>
-    <script>
-        NetGen = {
-            public: {
-                page_id: "operon",
-                urls: {
-                    save_email: "https://networkgenomics.com/save-email/",
-                    save_email_captcha: "https://networkgenomics.com/save-email/captcha/",
-                }
-            }
-        };
-        setupEmailForm();
-    </script>

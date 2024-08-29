@@ -9,12 +9,11 @@ Uploaders:
  Stefano Rivera <stefanor@debian.org>
 Build-Depends:
  debhelper-compat (= 13),
- dh-python,
+ dh-sequence-python3,
  python3-all,
- python3-mock <!nocheck>,
  python3-psutil <!nocheck>,
  python3-setuptools
-Standards-Version: 4.6.2
+Standards-Version: 4.7.0
 Homepage: https://github.com/mitogen-hq/mitogen/
 Vcs-Browser: https://salsa.debian.org/python-team/packages/python-mitogen
 Vcs-Git: https://salsa.debian.org/python-team/packages/python-mitogen.git
@@ -39,7 +38,7 @@ Package: ansible-mitogen
 Architecture: all
 Depends:
 # ansible alternatives are to ease backports to bullseye and earlier, before the split
- ansible-core (<< 2.15) | ansible (<< 8),
+ ansible-core (<< 2.18) | ansible (<< 11),
  ansible-core (>= 2.10) | ansible (>= 2.10),
  python3-mitogen (= ${source:Version}),
  ${misc:Depends},

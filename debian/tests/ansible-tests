@@ -2,7 +2,8 @@
 set -eufx
 
 cp -a tests/ansible "$AUTOPKGTEST_TMP/ansible-tests"
-cp tests/testlib.py "$AUTOPKGTEST_TMP/ansible-tests/"
+sed -e "s/TESTS_DIR, 'ansible', /TESTS_DIR, /" tests/testlib.py \
+    > "$AUTOPKGTEST_TMP/ansible-tests/testlib.py"
 cd "$AUTOPKGTEST_TMP"
 
 python3 -m unittest discover -v \

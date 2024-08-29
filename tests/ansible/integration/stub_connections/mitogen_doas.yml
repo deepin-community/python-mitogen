@@ -3,13 +3,11 @@
   hosts: test-targets
   gather_facts: false
   tasks:
-  - meta: end_play
-    when: not is_mitogen
+  - include_tasks: ../_mitogen_only.yml
 
   - custom_python_detect_environment:
     vars:
       ansible_connection: mitogen_doas
-      ansible_python_interpreter: python  # avoid Travis virtualenv breakage
       ansible_doas_exe: stub-doas.py
       ansible_user: someuser
     register: out
@@ -22,3 +20,4 @@
       fail_msg: out={{out}}
   tags:
     - mitogen_doas
+    - mitogen_only

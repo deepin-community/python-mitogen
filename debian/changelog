@@ -1,3 +1,75 @@
+python-mitogen (0.3.9-1) unstable; urgency=medium
+
+  * New upstream point release.
+  * Drop patch ansible-2.17, superseded upstream.
+  * Bump Standards-Version to 4.7.0, no changes needed.
+
+ -- Stefano Rivera <stefanor@debian.org>  Wed, 14 Aug 2024 15:20:56 +0200
+
+python-mitogen (0.3.8-1) unstable; urgency=medium
+
+  * New upstream point release.
+  * Patch: Handle unsafe paths in _remote_chmod.
+  * Refresh patches.
+  * Drop patches: poll-poller and ask-become-pass, superseded upstream.
+
+ -- Stefano Rivera <stefanor@debian.org>  Fri, 02 Aug 2024 17:05:44 +0900
+
+python-mitogen (0.3.7-4) unstable; urgency=medium
+
+  * Patch: Ansible 10 support. (Closes: 1073837)
+
+ -- Stefano Rivera <stefanor@debian.org>  Fri, 28 Jun 2024 20:39:56 -0700
+
+python-mitogen (0.3.7-3) unstable; urgency=medium
+
+  * Team Upload
+  * remove python3-mock build dependency
+  * use new dh-sequence-python3
+
+ -- Alexandre Detiste <tchet@debian.org>  Sat, 27 Apr 2024 03:53:09 +0200
+
+python-mitogen (0.3.7-2) unstable; urgency=medium
+
+  * Bump Depends for Ansible 9 support.
+
+ -- Stefano Rivera <stefanor@debian.org>  Sat, 20 Apr 2024 11:12:15 -0400
+
+python-mitogen (0.3.7-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Refresh patches.
+  * Drop patches ansible-2.15 and ansible-2.16, superseded upstream.
+
+ -- Stefano Rivera <stefanor@debian.org>  Thu, 11 Apr 2024 09:45:21 -0400
+
+python-mitogen (0.3.6-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Drop patch ansible-2.14, superseded upstream.
+  * Replace patch ansible-2.16 with upstream patches for 2.15 and 2.16.
+
+ -- Stefano Rivera <stefanor@debian.org>  Fri, 05 Apr 2024 19:46:18 -0400
+
+python-mitogen (0.3.5-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Refresh patches.
+  * Drop patches, superseded upstream: no-subprocess32, python-3.11,
+    python-3.12.
+
+ -- Stefano Rivera <stefanor@debian.org>  Thu, 28 Mar 2024 13:45:03 -0400
+
+python-mitogen (0.3.4-3) unstable; urgency=medium
+
+  * Patch: Support setting interpreter_python in config, again.
+  * Patch: Support Ansible 2.16. (Closes: #1059935)
+  * Patch: Python 3.11 support.
+  * Patch: Python 3.12 support. (Closes: #1058132, 1061755)
+  * Patch test module paths in testlib.py in the ansible-tests autopkgtest.
+
+ -- Stefano Rivera <stefanor@debian.org>  Fri, 08 Mar 2024 18:21:07 -0400
+
 python-mitogen (0.3.4-2) unstable; urgency=medium
 
   * Patch: Fix --ask-become-pass, again. We had backed out part of the
