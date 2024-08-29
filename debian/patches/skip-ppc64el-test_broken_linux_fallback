@@ -8,7 +8,7 @@ Bug-Upstream: https://github.com/mitogen-hq/mitogen/issues/831
  1 file changed, 3 insertions(+)
 
 diff --git a/tests/parent_test.py b/tests/parent_test.py
-index fa7e4fb..4a111db 100644
+index 558a89b..a746188 100644
 --- a/tests/parent_test.py
 +++ b/tests/parent_test.py
 @@ -1,6 +1,7 @@
@@ -19,7 +19,7 @@ index fa7e4fb..4a111db 100644
  import signal
  import sys
  import time
-@@ -190,6 +191,8 @@ class OpenPtyTest(testlib.TestCase):
+@@ -193,6 +194,8 @@ class OpenPtyTest(testlib.TestCase):
  
      @unittest.skipIf(condition=(os.uname()[0] != 'Linux'),
                        reason='Fallback only supported on Linux')

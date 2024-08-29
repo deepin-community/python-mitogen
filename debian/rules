@@ -3,7 +3,7 @@
 export PYBUILD_BEFORE_BUILD=rm -rf {dir}/ansible_mitogen/compat/simplejson
 
 %:
-	dh $@ --with python3 --buildsystem=pybuild
+	dh $@ --buildsystem=pybuild
 
 override_dh_auto_test:
 	dh_auto_test -- --system custom --test-args="{interpreter} \

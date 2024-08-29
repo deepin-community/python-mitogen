@@ -3,13 +3,11 @@
   hosts: test-targets
   gather_facts: false
   tasks:
-  - meta: end_play
-    when: not is_mitogen
+  - include_tasks: ../_mitogen_only.yml
 
   - custom_python_detect_environment:
     vars:
       ansible_connection: lxc
-      ansible_python_interpreter: python  # avoid Travis virtualenv breakage
       mitogen_lxc_attach_path: stub-lxc-attach.py
     register: out
 
@@ -19,3 +17,4 @@
       fail_msg: out={{out}}
   tags:
     - lxc
+    - mitogen_only

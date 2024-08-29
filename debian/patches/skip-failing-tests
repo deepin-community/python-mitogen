@@ -8,10 +8,10 @@ Subject: Skip tests that fail for unknown reasons
  2 files changed, 6 insertions(+)
 
 diff --git a/tests/responder_test.py b/tests/responder_test.py
-index 1131b42..e39a9da 100644
+index d1e6581..f0d0a56 100644
 --- a/tests/responder_test.py
 +++ b/tests/responder_test.py
-@@ -170,6 +170,7 @@ class BrokenModulesTest(testlib.TestCase):
+@@ -174,6 +174,7 @@ class BrokenModulesTest(testlib.TestCase):
  
  
  class ForwardTest(testlib.RouterMixin, testlib.TestCase):

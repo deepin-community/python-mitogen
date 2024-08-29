@@ -1,0 +1,26 @@
+From: Jonathan Rosser <jonathan.rosser@rd.bbc.co.uk>
+Date: Tue, 16 Jul 2024 15:38:40 +0100
+Subject: ansible_mitogen: Handle unsafe paths in _remote_chmod
+
+This is missing from https://github.com/mitogen-hq/mitogen/commit/b822f20007ebe94106b15275962ea4cbbd8a0331
+
+Origin: https://github.com/mitogen-hq/mitogen/pull/1087
+---
+ ansible_mitogen/mixins.py | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/ansible_mitogen/mixins.py b/ansible_mitogen/mixins.py
+index 0ba41aa..2cd97a3 100644
+--- a/ansible_mitogen/mixins.py
++++ b/ansible_mitogen/mixins.py
+@@ -280,7 +280,9 @@ class ActionModuleMixin(ansible.plugins.action.ActionBase):
+                   paths, mode, sudoable)
+         return self.fake_shell(lambda: mitogen.select.Select.all(
+             self._connection.get_chain().call_async(
+-                ansible_mitogen.target.set_file_mode, path, mode
++                ansible_mitogen.target.set_file_mode,
++                ansible_mitogen.utils.unsafe.cast(path),
++                mode,
+             )
+             for path in paths
+         ))

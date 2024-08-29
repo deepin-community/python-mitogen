@@ -12,10 +12,10 @@ Forwarded: no
  1 file changed, 1 insertion(+)
 
 diff --git a/tests/two_three_compat_test.py b/tests/two_three_compat_test.py
-index 4490e5d..723b96b 100644
+index ab9f4e1..d58d18c 100644
 --- a/tests/two_three_compat_test.py
 +++ b/tests/two_three_compat_test.py
-@@ -13,6 +13,7 @@ class TwoThreeCompatTest(testlib.RouterMixin, testlib.TestCase):
+@@ -20,6 +20,7 @@ class TwoThreeCompatTest(testlib.RouterMixin, testlib.TestCase):
      else:
          python_path = 'python3'
  

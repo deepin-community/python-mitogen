@@ -13,11 +13,14 @@
       -o "ControlPath /tmp/mitogen-ansible-test-{{18446744073709551615|random}}"
 
   tasks:
+    - include_tasks: ../_mitogen_only.yml
+
     - name: ansible_ssh_user, ansible_ssh_pass
       shell: >
         ANSIBLE_ANY_ERRORS_FATAL=false
         ANSIBLE_STRATEGY=mitogen_linear
-        ANSIBLE_SSH_ARGS=""
+        ANSIBLE_SSH_ARGS="-o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa"
+        ANSIBLE_VERBOSITY="{{ ansible_verbosity }}"
         ansible -m shell -a whoami
         {% for inv in ansible_inventory_sources %}
         -i "{{ inv }}"
@@ -28,13 +31,13 @@
       args:
         chdir: ../..
       register: out
-      when: is_mitogen
 
     - name: ansible_ssh_user, wrong ansible_ssh_pass
       shell: >
         ANSIBLE_ANY_ERRORS_FATAL=false
         ANSIBLE_STRATEGY=mitogen_linear
-        ANSIBLE_SSH_ARGS=""
+        ANSIBLE_SSH_ARGS="-o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa"
+        ANSIBLE_VERBOSITY="{{ ansible_verbosity }}"
         ansible -m shell -a whoami
         {% for inv in ansible_inventory_sources %}
         -i "{{ inv }}"
@@ -42,24 +45,24 @@
         test-targets
         -e ansible_ssh_user=mitogen__has_sudo
         -e ansible_ssh_pass=wrong_password
+        -e ansible_python_interpreter=python3000
       args:
         chdir: ../..
       register: out
       ignore_errors: true
-      when: is_mitogen
 
     - assert:
         that:
           - out.rc == 4  # ansible.executor.task_queue_manager.TaskQueueManager.RUN_UNREACHABLE_HOSTS
         fail_msg: out={{out}}
-      when: is_mitogen
 
 
     - name: ansible_user, ansible_ssh_pass
       shell: >
         ANSIBLE_ANY_ERRORS_FATAL=false
         ANSIBLE_STRATEGY=mitogen_linear
-        ANSIBLE_SSH_ARGS=""
+        ANSIBLE_SSH_ARGS="-o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa"
+        ANSIBLE_VERBOSITY="{{ ansible_verbosity }}"
         ansible -m shell -a whoami
         {% for inv in ansible_inventory_sources %}
         -i "{{ inv }}"
@@ -70,13 +73,13 @@
       args:
         chdir: ../..
       register: out
-      when: is_mitogen
 
     - name: ansible_user, wrong ansible_ssh_pass
       shell: >
         ANSIBLE_ANY_ERRORS_FATAL=false
         ANSIBLE_STRATEGY=mitogen_linear
-        ANSIBLE_SSH_ARGS=""
+        ANSIBLE_SSH_ARGS="-o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa"
+        ANSIBLE_VERBOSITY="{{ ansible_verbosity }}"
         ansible -m shell -a whoami
         {% for inv in ansible_inventory_sources %}
         -i "{{ inv }}"
@@ -84,24 +87,24 @@
         test-targets
         -e ansible_user=mitogen__has_sudo
         -e ansible_ssh_pass=wrong_password
+        -e ansible_python_interpreter=python3000
       args:
         chdir: ../..
       register: out
       ignore_errors: true
-      when: is_mitogen
 
     - assert:
         that:
           - out.rc == 4  # ansible.executor.task_queue_manager.TaskQueueManager.RUN_UNREACHABLE_HOSTS
         fail_msg: out={{out}}
-      when: is_mitogen
 
 
     - name: ansible_user, ansible_password
       shell: >
         ANSIBLE_ANY_ERRORS_FATAL=false
         ANSIBLE_STRATEGY=mitogen_linear
-        ANSIBLE_SSH_ARGS=""
+        ANSIBLE_SSH_ARGS="-o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa"
+        ANSIBLE_VERBOSITY="{{ ansible_verbosity }}"
         ansible -m shell -a whoami
         {% for inv in ansible_inventory_sources %}
         -i "{{ inv }}"
@@ -112,13 +115,13 @@
       args:
         chdir: ../..
       register: out
-      when: is_mitogen
 
     - name: ansible_user, wrong ansible_password
       shell: >
         ANSIBLE_ANY_ERRORS_FATAL=false
         ANSIBLE_STRATEGY=mitogen_linear
-        ANSIBLE_SSH_ARGS=""
+        ANSIBLE_SSH_ARGS="-o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa"
+        ANSIBLE_VERBOSITY="{{ ansible_verbosity }}"
         ansible -m shell -a whoami
         {% for inv in ansible_inventory_sources %}
         -i "{{ inv }}"
@@ -126,17 +129,16 @@
         test-targets
         -e ansible_user=mitogen__has_sudo
         -e ansible_password=wrong_password
+        -e ansible_python_interpreter=python3000
       args:
         chdir: ../..
       register: out
       ignore_errors: true
-      when: is_mitogen
 
     - assert:
         that:
           - out.rc == 4  # ansible.executor.task_queue_manager.TaskQueueManager.RUN_UNREACHABLE_HOSTS
         fail_msg: out={{out}}
-      when: is_mitogen
 
 
     - name: setup ansible_ssh_private_key_file
@@ -148,7 +150,8 @@
       shell: >
         ANSIBLE_ANY_ERRORS_FATAL=false
         ANSIBLE_STRATEGY=mitogen_linear
-        ANSIBLE_SSH_ARGS=""
+        ANSIBLE_SSH_ARGS="-o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa"
+        ANSIBLE_VERBOSITY="{{ ansible_verbosity }}"
         ansible -m shell -a whoami
         {% for inv in ansible_inventory_sources %}
         -i "{{ inv }}"
@@ -159,13 +162,13 @@
       args:
         chdir: ../..
       register: out
-      when: is_mitogen
 
     - name: ansible_user, wrong ansible_ssh_private_key_file
       shell: >
         ANSIBLE_ANY_ERRORS_FATAL=false
         ANSIBLE_STRATEGY=mitogen_linear
-        ANSIBLE_SSH_ARGS=""
+        ANSIBLE_SSH_ARGS="-o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa"
+        ANSIBLE_VERBOSITY="{{ ansible_verbosity }}"
         ansible -m shell -a whoami
         {% for inv in ansible_inventory_sources %}
         -i "{{ inv }}"
@@ -173,14 +176,15 @@
         test-targets
         -e ansible_user=mitogen__has_sudo
         -e ansible_ssh_private_key_file=/dev/null
+        -e ansible_python_interpreter=python3000
       args:
         chdir: ../..
       register: out
       ignore_errors: true
-      when: is_mitogen
 
     - assert:
         that:
           - out.rc == 4  # ansible.executor.task_queue_manager.TaskQueueManager.RUN_UNREACHABLE_HOSTS
         fail_msg: out={{out}}
-      when: is_mitogen
+  tags:
+    - mitogen_only

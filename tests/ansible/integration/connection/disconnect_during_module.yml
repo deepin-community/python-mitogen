@@ -6,11 +6,12 @@
   gather_facts: no
   any_errors_fatal: false
   tasks:
-  - meta: end_play
-    when: not is_mitogen
+  - include_tasks: ../_mitogen_only.yml
 
   - name: Run _disconnect_during_module.yml
     delegate_to: localhost
+    environment:
+      ANSIBLE_VERBOSITY: "{{ ansible_verbosity }}"
     command: |
       ansible-playbook
       {% for inv in ansible_inventory_sources %}
@@ -32,3 +33,4 @@
   tags:
     - disconnect
     - disconnect_during_module
+    - mitogen_only
